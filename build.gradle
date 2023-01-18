@@ -1,0 +1,53 @@
+buildscript {
+	ext {
+		springBootVersion = '2.6.7'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "com.diffplug.spotless" version "6.5.0"
+	id 'application'
+}
+
+group = 'com.githubAPI'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly group: 'com.h2database', name: 'h2', version: '2.1.214'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.6.7'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'org.testng', name: 'testng', version: '7.7.1'
+	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+	testImplementation 'io.rest-assured:xml-path:5.3.0'
+	testImplementation 'io.rest-assured:json-schema-validator:5.3.0'
+}
+
+
+test {
+	useTestNG()
+}
